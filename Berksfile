@@ -12,3 +12,5 @@ cookbook 'build-essential'
 cookbook 'rsync', '~> 0.8.8'
 cookbook 'ruby_build', '~> 0.8.0'
 cookbook 'rvm', :git => "https://github.com/fnichol/chef-rvm"
+cookbook 'rails', '~> 0.9.2'
+cookbook 'bundler', '~> 0.2.0'
