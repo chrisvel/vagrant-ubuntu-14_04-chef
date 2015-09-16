@@ -77,6 +77,7 @@ Vagrant.configure(2) do |config|
     chef.data_bags_path = "./cookbooks"
     chef.add_recipe 'nginx'
     chef.add_recipe 'apt'
+    chef.add_recipe 'nodejs'
     chef.add_recipe 'mysql::server'
     chef.add_recipe 'mysql::client'
     chef.add_recipe 'git'
@@ -86,6 +87,7 @@ Vagrant.configure(2) do |config|
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::user"
     chef.add_recipe "rvm::vagrant"
+    chef.add_recipe "rails"
     chef.json = {
       :rvm => {
         vagrant: {

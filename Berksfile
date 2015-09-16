@@ -14,3 +14,4 @@ cookbook 'ruby_build', '~> 0.8.0'
 cookbook 'rvm', :git => "https://github.com/fnichol/chef-rvm"
 cookbook 'rails', '~> 0.9.2'
 cookbook 'bundler', '~> 0.2.0'
+cookbook 'nodejs', '~> 2.4.2'
