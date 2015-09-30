@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  # config.vm.synced_folder "../data", "/vagrant_data"
+  config.vm.synced_folder "~/c0deLab/webserver_vagrant_data", "/usr/share/nginx/html"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -66,8 +66,8 @@ Vagrant.configure(2) do |config|
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
   config.vm.provision "shell", inline: <<-SHELL
-    # sudo apt-get update
-    # sudo apt-get upgrade -y
+    sudo apt-get update
+    sudo apt-get upgrade -y
     # sudo apt-get install -y apache2
   SHELL
 
@@ -87,7 +87,9 @@ Vagrant.configure(2) do |config|
     chef.add_recipe "rvm::system"
     chef.add_recipe "rvm::user"
     chef.add_recipe "rvm::vagrant"
-    chef.add_recipe "rails"
+    chef.add_recipe "bundler"
+    chef.add_recipe "rvm::rails"
+    chef.add_recipe "puma"
     chef.json = {
       :rvm => {
         vagrant: {
@@ -113,14 +115,8 @@ Vagrant.configure(2) do |config|
             :modules => [
                 "http_stub_status_module",
                 "http_ssl_module",
-                "http_gzip_static_module",
-                "passenger",
+                "http_gzip_static_module"
                 ]
-            },
-            :passenger => {
-                :version => "5.0.18",
-                :ruby => "/home/vagrant/.rvm/gems/ruby-2.2.2/wrappers/ruby",
-                :root => "/home/vagrant/.rvm/gems/ruby-2.2.2/gems/passenger-5.0.18"
             }
       },
       :mysql => {
@@ -136,7 +132,6 @@ Vagrant.configure(2) do |config|
 end
 
 # TODO change permissions to /var/lib/gems
-# gem install passenger
 # apt-get install ruby-dev
 # apt-get install libcurl4-openssl-dev
 # rvmsudo passenger-install-nginx-module
